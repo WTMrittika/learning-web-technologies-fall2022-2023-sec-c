@@ -2,7 +2,12 @@
     <infoTable sl = "1">
         <ID>1</ID>
         <NAME>John Doe</NAME>
-        <ADDRESS> H# 38, R#3, Banani, Dhaka </ADDRESS>
+        <ADDRESS>
+            <FLAT> </FLAT>
+            <HOUSE>38</HOUSE>
+            <ROAD>3</ROAD>
+            <AREA>Banani, Dhaka</AREA>
+        </ADDRESS>
         <DEPARTMENT>Sales</DEPARTMENT>
         <SALARY>$20000</SALARY>
     </infoTable>
@@ -10,7 +15,12 @@
     <infoTable sl = "2">
         <ID>2</ID>
         <NAME>Mark Zuckerberg</NAME>
-        <ADDRESS> Flat# A/1, H# 20, R#18, Mirpur, Dhaka </ADDRESS>
+        <ADDRESS>
+            <FLAT>A/1</FLAT>
+            <HOUSE>20</HOUSE>
+            <ROAD>18</ROAD>
+            <AREA>Mirpur, Dhaka</AREA>
+        </ADDRESS>
         <DEPARTMENT>Accounts</DEPARTMENT>
         <SALARY>$12000</SALARY>
     </infoTable>
@@ -18,7 +28,12 @@
     <infoTable sl = "3">
         <ID>3</ID>
         <NAME>Ala Voski</NAME>
-        <ADDRESS> H# 38, R#3, Motijheel </ADDRESS>
+        <ADDRESS>
+            <FLAT> </FLAT>
+            <HOUSE>38</HOUSE>
+            <ROAD>3</ROAD>
+            <AREA>Motijheel</AREA>
+        </ADDRESS>
         <DEPARTMENT>Human Resource</DEPARTMENT>
         <SALARY>$30000</SALARY>
     </infoTable>
