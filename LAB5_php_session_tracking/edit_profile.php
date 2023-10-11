@@ -104,7 +104,7 @@ if(isset($_REQUEST['submit'])){
                             <input type="date" id="dob" name="dob"  value="<?php echo $cookie_dob; ?>" required>
                         </fieldset>
                         <br>
-                        <input type="submit" value="Submit" name="submit">
+                        <input type="submit" value="Save changes" name="submit">
                         <input type="reset" value="Reset">
                     </td>
                 </tr>

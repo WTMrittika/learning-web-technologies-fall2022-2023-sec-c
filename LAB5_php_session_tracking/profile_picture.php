@@ -8,7 +8,7 @@
         <tr>
             <td><h2>&nbsp;X Company</h2></td>
             <td align="right">
-                <a href="view_profile.php">"username"</a> | <a href="login.php">Logout</a>
+                Logged in as <a href="view_profile.php">name</a> | <a href="login.php">Logout</a>
             </td>
         </tr>
         <tr>
@@ -23,6 +23,7 @@
                 </ul>
             </td>
             <td colspan="2">
+            <form action="" method="" ecntype="">
         <fieldset>
             <legend>PROFILE PICTURE</legend>
             <table align="left" style="border-collapse: collapse; height: 50%;" width: 50%;>
@@ -37,6 +38,7 @@
             </tr><br>
             </table>
         </fieldset>
+</form>
         </td>
         <tr>
             <td colspan="2" align="center">Copyright © 2023</td>

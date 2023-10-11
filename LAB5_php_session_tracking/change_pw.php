@@ -15,26 +15,26 @@ if(isset($_REQUEST['submit'])){
 
     $error_message = '';
 
-    $current_password = $_REQUEST['current_password'];
-    $new_password = $_REQUEST['new_password'];
-    $retype_password = $_REQUEST['retype_password'];
+    $cpassword = $_REQUEST['cpassword'];
+    $npass = $_REQUEST['npass'];
+    $repass = $_REQUEST['repass'];
 
-    if($current_password == ''){
+    if($cpassword == ''){
         $error_message .= "Your must enter Current Password! <br>";
     }
-    if($new_password == ''){
+    if($npass == ''){
         $error_message .= "Your must fill New Password! <br>";
     }
-    if($retype_password == ''){
+    if($repass == ''){
         $error_message .= "Your must fill Retype Password! <br>";
     }
 
 
-    if ($current_password !== '' && $new_password !== '' && $retype_password !== '' && $current_password == $cookie_password) {
+    if ($cpassword !== '' && $npass !== '' && $repass !== '' && $cpassword == $cookie_password) {
 
-        setcookie('password', $new_password, time() + (86400 * 30), "/");
+        setcookie('password', $npass, time() + (86400 * 30), "/");
 
-        header("location: logout.php");
+        header("location: public_home.php");
     }else{
         echo "Wrong Current Password!";
     }
@@ -51,7 +51,7 @@ if(isset($_REQUEST['submit'])){
         <tr>
             <td><h2>&nbsp;X Company</h2></td>
             <td align="right">
-                <a href="view_profile.php">"username"</a> | <a href="login.php">Logout</a>
+                <a href="view_profile.php"><?php echo $cookie_name; ?></a> | <a href="login.php">Logout</a>
             </td>
         </tr>
         <tr>
@@ -67,6 +67,7 @@ if(isset($_REQUEST['submit'])){
                 </ul>
             </td>
             <td colspan="2">
+                <form method="post" action="#">
                 <fieldset>
                     <legend>CHANGE PASSWORD</legend>
                     <table align="left" style="border-collapse: collapse; height: 50%;" width="50%">
@@ -84,7 +85,9 @@ if(isset($_REQUEST['submit'])){
                         </tr>
                     </table>
                 </fieldset>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" name="submit">
+                </form>
+                
             </td>
         </tr>
         <tr>
