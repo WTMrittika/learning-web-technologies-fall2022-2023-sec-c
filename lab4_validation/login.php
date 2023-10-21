@@ -5,24 +5,17 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-
-    // Validation rules for username
     if (strlen($username) < 2 || !isValidUsername($username)) {
         $error_messages[] = "Username is invalid. It must contain at least two alphanumeric characters, period, dash, or underscore only.";
     }
 
-    // Validation rules for password
     if (strlen($password) < 8 || !isValidPassword($password)) {
         $error_messages[] = "Password is invalid. It must not be less than eight characters and contain at least one of the special characters (@, #, $, %).";
     }
 
     if (empty($error_messages)) {
-        // Validation passed, and no errors
-        // You can save the registration data here
-        // For simplicity, we'll just display a success message
         echo "Login successful!";
     } else {
-        // Display error messages in black color
         foreach ($error_messages as $error_message) {
             echo '<font color="black">' . $error_message . '</font><br>';
         }
@@ -41,7 +34,6 @@ function isValidUsername($username) {
             return false;
         }
     }
-
     return true;
 }
 
