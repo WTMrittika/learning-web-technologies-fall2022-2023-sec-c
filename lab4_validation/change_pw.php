@@ -6,7 +6,6 @@ if (isset($_POST['submit'])) {
     $npass= $_POST['npass'];
     $repass = $_POST['repass'];
 
-    // Validation rules
     if ($npass=== $cpassword) {
         $error_messages[] = "New Password should not be the same as the Current Password.";
     }
@@ -18,7 +17,6 @@ if (isset($_POST['submit'])) {
     if (empty($error_messages)) {
         echo "Password changed successfully!";
     } else {
-        // Display error messages in black color
         foreach ($error_messages as $error_message) {
             echo '<font color="black">' . $error_message . '</font><br>';
         }
