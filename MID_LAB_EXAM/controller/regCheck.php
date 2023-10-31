@@ -1,44 +1,31 @@
 <?php
-require_once("../model/userModel.php");
 
-if (isset($_REQUEST['submit'])) {
-    $error_message = '';
+include_once("../model/userModel.php");
+$id = "";
+$password = "";
+$confirmPassword = "";
+$name = "";
+$type = "";
+if (isset($_POST["submit"])) {
 
-    session_start();
-    $id = $_REQUEST['id'];
-    $password = $_REQUEST['password'];
-    $confirm_password = $_REQUEST['confirm_password'];
-    $name = $_REQUEST['name'];
+    $id = $_POST["id"];
+    $password = $_POST["password"];
+    $confirmPassword = $_POST["confirmPassword"];
+    $name = $_POST["name"];
+    if (isset($_POST["type"])) {
 
-    if (isset($_REQUEST['user_type'])) {
-        $userType = $_REQUEST['user_type'];
+        $type = $_POST["type"];
     } else {
-        $userType = '';
+        echo "Please select a user type\n\n";
     }
 
-    if ($id == "" || $password == "" || $confirm_password == "" || $name == "") {
-        echo "Please fill in all fields.";
-    } elseif ($password != $confirm_password) {
-        echo "Passwords do not match.";
-    } elseif (!str_contains($password, '@') && !str_contains($password, '#') && !str_contains($password, '$') && !str_contains($password, '%')) {
-        echo "Password must contain special characters (@, #, $, %).";
-    } elseif (strlen($password) < 4) {
-        echo "Password must be at least 4 characters long.";
+    if (!$_POST['id'] || !$_POST['password'] || !$_POST['confirmPassword'] ||  !$_POST['name']) {
+        echo "Please enter all the required fields\n";
+    } else if ($password != $confirmPassword) {
+        echo "Password did not match";
+    } else if (strlen($password) < 6) {
+        echo "Password must be at least 6 characters\n";
     } else {
-        $sql = RegistrationUser($id, $password, $name, $userType);
-
-        if ($sql) {
-            $_SESSION['user_id'] = $id; 
-
-            
-            setcookie("user_id", $id, time() + (86400 * 30), "/");
-
-            $_SESSION['flag'] = "true"; 
-
-            header('location: ../view/login.html'); 
-        } else {
-            echo "Invalid ";
-        }
+        register($id, $name, $password, $type);
     }
 }
-?>

@@ -1,97 +1,101 @@
 <?php
-    require_once('db.php');
+require_once('db.php');
 
-    function login($userId, $password){
-        $con = getConnection();
-        $sql = "select * from users where id='{$userId}' and password='{$password}'";
-        $result = mysqli_query($con, $sql);
-        $count = mysqli_num_rows($result);
+function login($id, $password)
+{
+    $con = getConnection();
+    $sql = "select * from users where id='{$id}' and password='{$password}'";
+    $result = mysqli_query($con, $sql);
+    $count = mysqli_num_rows($result);
 
-        if($count == 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-   
-    function RegistrationUser($id, $password, $name, $userType) {
-        $con = getConnection();
-        
-        $checkQuery = "SELECT id FROM users WHERE id = '$id'";
-        $checkResult = mysqli_query($con, $checkQuery);
-        
-        if (mysqli_num_rows($checkResult) > 0) {
-
-            echo "User ID already exists. Please choose a different ID.";
-            return false;
-        } else {
-            
-            $sql = "INSERT INTO users (id, password, name, user_type) VALUES ('$id', '$password', '$name', '$userType')";
-            
-            if (mysqli_query($con, $sql)) {
-                return true; 
-            } else {
-                return false; 
-            }
-        }
-    }
-
-    function getUser($id){
-        $con = getConnection();
-        $sql = "select * from users where id = '$id'";
-        $result = mysqli_query($con, $sql);
-        $count = mysqli_num_rows($result);
-        if ($count == 1) {
-            $row = mysqli_fetch_assoc($result);
-            return $row;
-        } else {
-            echo "Invalid User";
-            return false;
-        }
-    }
-
-    function getAllUser(){
-        $con = getConnection();
-        $sql = "select * from users";
-        $result = mysqli_query($con, $sql);
+    if ($count == 1) {
         $users = [];
-        while($row = mysqli_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)) {
             array_push($users, $row);
         }
+        $user = $users[0];
+        print_r($user[0]);
 
-        return $users;
-    }
+        session_start();
+        $_SESSION['user'] = ['id' => $user['id'], 'name' => $user['name'], 'password' => $user['password'], 'type' => $user['user_type']];
 
-    function updateUser($user){
-
-       
-        $con = getConnection();
-
-
-        $id = $user['id'];
-        $username = $user['username'];
-        $email = $user['email'];
-
-        $sql = "UPDATE users SET username = '$username', email = '$email' WHERE id = $id";
-
-        if (mysqli_query($con, $sql)) {
-            return true;
+        $_SESSION['flag'] = "true";
+        if ($user['type'] == 'admin') {
+            header('location: ../view/admin_home.php');
         } else {
-            return false;
+            header('location: ../view/user_home.php');
+        }
+    } else {
+
+        return false;
+    }
+}
+
+function register($id, $name, $password, $type)
+{
+    $con = getConnection();
+    $sql = "select * from users where id='{$id}'";
+    $result = mysqli_query($con, $sql);
+    $count = mysqli_num_rows($result);
+    if ($count == 1) {
+        print_r("User already exists");
+    } else {
+        $sql = "insert into users (id,name,password,user_type) values ('{$id}','{$name}','{$password}','{$type}')";
+        $result = mysqli_query($con, $sql);
+
+
+        if ($result) {
+            header('location: ../view/login.php');
+        } else {
+
+            echo "Error!";
         }
     }
+}
 
-    function deleteUser($id){
+function getUser($id)
+{
+    session_start();
+    if (isset($_SESSION['flag']) && $_SESSION['user']) {
+        $id = $_SESSION['user']['id'];
+    }
+    $con = getConnection();
+    $sql = "select * from users where id='{$id}'";
+    $result = mysqli_query($con, $sql);
+    $count = mysqli_num_rows($result);
 
-        $con = getConnection();
-        $sql = "DELETE FROM users WHERE id = $id";
-        
-        if (mysqli_query($con, $sql)) {
-            return true;
-        } else {
-            return false;
+    if ($count == 1) {
+        $users = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            array_push($users, $row);
         }
+        $user = $users[0];
+        print_r($user[0]);
+
+        session_start();
+        $_SESSION['user'] = ['id' => $user['id'], 'name' => $user['name'], 'password' => $user['password'], 'type' => $user['user_type']];
+
+        $_SESSION['flag'] = "true";
+        if ($user['type'] == 'admin') {
+            header('location: ../view/admin_home.php');
+        } else {
+            header('location: ../view/user_home.php');
+        }
+    } else {
+
+        return false;
+    }
+}
+
+function getAllUser()
+{
+    $con = getConnection();
+    $sql = "select * from users";
+    $result = mysqli_query($con, $sql);
+    $users = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($users, $row);
     }
 
-
-?>
+    return $users;
+}

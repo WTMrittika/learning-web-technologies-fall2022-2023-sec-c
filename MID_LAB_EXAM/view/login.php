@@ -1,16 +1,24 @@
+<?php
+include_once("../controller/loginCheck.php")
+?>
+
 <center>
-	<form method="post" action="../controller/loginCheck.php">
-		<table border="0" cellspacing="0" cellpadding="0">
+	<form action="" method="POST" enctype="">
+		<table border=" 0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td>
 					<fieldset>
-						<legend><h3>LOGIN</h3></legend>
-						User Id<br/>
-						<input type="text" name="userId"><br/>
-						Password<br/>
-						<input type="password" name="password"><br /><hr/>
-						<input type="submit" name="submit" value="Login">
-						<a href="registration.html">Register</a>
+						<legend>
+						<h3>LOGIN</h3>
+						</legend>
+						User Id<br />
+						<input type="text" name="id" value="<?php echo $id ?>" /><br />
+						Password<br />
+						<input type="password" name="password" value="<?php echo $password ?>" />
+						<br />
+						<hr />
+						<input type="submit" value="Login" name="submit">
+						<a href="registration.php">Register</a>
 					</fieldset>
 				</td>
 			</tr>

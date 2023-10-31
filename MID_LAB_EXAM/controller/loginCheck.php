@@ -1,32 +1,18 @@
 <?php
-require_once("../model/userModel.php");
 
-session_start();
+include_once("../model/userModel.php");
+$id = "";
+$password = "";
 
-if (isset($_POST['submit'])) {
-    $userId = $_POST['userId'];
-    $password = $_POST['password'];
+if (isset($_POST["submit"])) {
 
-  
-    $userData = login($userId, $password);
+    $id = $_POST["id"];
+    $password = $_POST["password"];
 
-    if ($userData) {
-        $_SESSION['user_id'] = $userId;
 
-        if ($userData['user_type'] === 'Admin') {
-            
-            $_SESSION['user_type'] = 'Admin';
-            setcookie("user_id", $userId, time() + (86400 * 30), "/");
-            header('Location: ../view/admin_home.html');
-        } else {
-           
-            $_SESSION['user_type'] = 'User';
-            setcookie("user_id", $userId, time() + (86400 * 30), "/");
-            header('Location: ../view/user_home.html');
-        }
-        exit();
+    if (!$_POST['id'] || !$_POST['password']) {
+        echo "Please enter all required fields\n";
     } else {
-        echo "Invalid credentials. Please try again or register.";
+        login($id, $password);
     }
 }
-?>

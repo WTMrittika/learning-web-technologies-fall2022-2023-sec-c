@@ -1,8 +1,13 @@
+<?php
+include_once("../controller/userCheck.php");
+include_once("../controller/userData.php");
+
+?>
 <center>
-	<h1>Welcome Anne!</h1>
+	<h1>Welcome <?php echo $user['name'] ?>!</h1>
 	<a href="profile.php">Profile</a>
-	<br/>
-	<a href="change_password.php">Change Password</a>
-	<br/>
-	<a href="login.php">Logout</a>
+	<br />
+	<a href="change_password.html">Change Password</a>
+	<br />
+	<a href="logout.php">Logout</a>
 </center>

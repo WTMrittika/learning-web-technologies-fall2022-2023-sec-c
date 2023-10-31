@@ -5,7 +5,6 @@ $dbname = 'mid';
 $dbuser = 'root';
 $dbpassword = '';
 
-
 function getConnection(){
     global $dbhost;
     global $dbname;
