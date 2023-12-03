@@ -1,5 +1,5 @@
 <?php
-    include("../controllers/homeControl.php");
+    include("../controllers/homeCheck.php");
 ?>
 
 <!DOCTYPE html>
