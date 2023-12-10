@@ -7,7 +7,6 @@ function validateForm() {
     let gender = document.querySelector('input[name="gender"]:checked').value;
 
     let error = "";
-    //console.log(gender, userType);
 
     if (name === "") {
         error += "name must be filled out<br>";
